@@ -24,6 +24,7 @@ package dev.cristike.aqua.server;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.NotNull;
 
 public class AquaServer {
@@ -38,7 +39,13 @@ public class AquaServer {
     }
 
     /**
-     * Sends the message to the console.
+     * Gets the server scheduler.
+     * */
+    @NotNull
+    public static BukkitScheduler getScheduler() { return getServer().getScheduler(); }
+
+    /**
+     * Sends the given message to the console.
      *
      * @param message the message
      * */
