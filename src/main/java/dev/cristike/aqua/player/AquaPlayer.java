@@ -22,7 +22,7 @@
 
 package dev.cristike.aqua.player;
 
-import dev.cristike.aqua.server.AquaServer;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -34,6 +34,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class AquaPlayer {
+
     /**
      * Gets the online player with the given name.
      *
@@ -41,7 +42,7 @@ public class AquaPlayer {
      * @return an optional that may contain the player
      * */
     public static Optional<Player> getPlayer(@NotNull String name) {
-        return Optional.ofNullable(AquaServer.getServer().getPlayer(name));
+        return Optional.ofNullable(Bukkit.getPlayer(name));
     }
 
     /**
@@ -51,17 +52,7 @@ public class AquaPlayer {
      * @return an optional that may contain the player
      */
     public static Optional<Player> getPlayer(@NotNull UUID uuid) {
-        return Optional.ofNullable(AquaServer.getServer().getPlayer(uuid));
-    }
-
-    /**
-     * Gets the online players that meet the given condition.
-     *
-     * @param predicate the condition
-     * @return the list of players that met the condition
-     * */
-    public static List<Player> getPlayers(@NotNull Predicate<Player> predicate) {
-        return AquaServer.getServer().getOnlinePlayers().stream().filter(predicate).collect(Collectors.toList());
+        return Optional.ofNullable(Bukkit.getPlayer(uuid));
     }
 
     /**
@@ -71,8 +62,8 @@ public class AquaPlayer {
      * @return an optional that may contain the offline player
      * */
     public static Optional<OfflinePlayer> getOfflinePlayer(@NotNull String name) {
-        OfflinePlayer offlinePlayer = Arrays.stream(AquaServer.getServer().getOfflinePlayers())
-                .filter(player -> Objects.equals(player.getName(), name)).findFirst().orElse(null);
+        OfflinePlayer offlinePlayer = Arrays.stream(Bukkit.getOfflinePlayers())
+                .filter(target -> Objects.equals(target.getName(), name)).findFirst().orElse(null);
 
         return Optional.ofNullable(offlinePlayer);
     }
@@ -84,10 +75,20 @@ public class AquaPlayer {
      * @return an optional that may contain the offline player
      * */
     public static Optional<OfflinePlayer> getOfflinePlayer(@NotNull UUID uuid) {
-        OfflinePlayer offlinePlayer = Arrays.stream(AquaServer.getServer().getOfflinePlayers())
-                .filter(player -> player.getUniqueId().equals(uuid)).findFirst().orElse(null);
+        OfflinePlayer offlinePlayer = Arrays.stream(Bukkit.getOfflinePlayers())
+                .filter(target -> target.getUniqueId().equals(uuid)).findFirst().orElse(null);
 
         return Optional.ofNullable(offlinePlayer);
+    }
+
+    /**
+     * Gets the online players that meet the given condition.
+     *
+     * @param predicate the condition
+     * @return the list of players that met the condition
+     * */
+    public static List<Player> getPlayers(@NotNull Predicate<Player> predicate) {
+        return Bukkit.getOnlinePlayers().stream().filter(predicate).collect(Collectors.toList());
     }
 
     /**
@@ -96,7 +97,7 @@ public class AquaPlayer {
      * @param message the message
      * */
     public static void sendMessage(@NotNull String message) {
-        AquaServer.getServer().getOnlinePlayers().forEach(player -> player.sendMessage(message));
+        Bukkit.getOnlinePlayers().forEach(target -> target.sendMessage(message));
     }
 
     /**
@@ -125,7 +126,7 @@ public class AquaPlayer {
      * @param location the location
      * */
     public static void teleport(@NotNull Collection<Player> players, @NotNull Location location) {
-        players.forEach(player -> player.teleport(location));
+        players.forEach(target -> target.teleport(location));
     }
 
     /***
@@ -134,7 +135,7 @@ public class AquaPlayer {
      * @param consumer the action
      */
     public static void forEach(@NotNull Consumer<Player> consumer) {
-        AquaServer.getServer().getOnlinePlayers().forEach(consumer);
+        Bukkit.getOnlinePlayers().forEach(consumer);
     }
 
     /***
@@ -157,7 +158,7 @@ public class AquaPlayer {
      * */
     public static void forEachIf(@NotNull Predicate<Player> predicate,
                                  @NotNull Consumer<Player> consumer) {
-        AquaServer.getServer().getOnlinePlayers().stream().filter(predicate).forEach(consumer);
+        Bukkit.getOnlinePlayers().stream().filter(predicate).forEach(consumer);
     }
 
 

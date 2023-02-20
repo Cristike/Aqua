@@ -20,30 +20,18 @@
  *   SOFTWARE.
  */
 
-package dev.cristike.aqua.server;
+package dev.cristike.aqua.plugin;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Server;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-public class AquaServer {
+public class AquaPlugin {
 
     /**
-     * Gets the server on which the plugin runs.
-     *
-     * @return the server instance
+     * Gets the instance of the plugin that hosts the tool.
      * */
     @NotNull
-    public static Server getServer() {
-        return Bukkit.getServer();
-    }
-
-    /**
-     * Sends the given message to the console.
-     *
-     * @param message the message
-     * */
-    public static void sendConsoleMessage(@NotNull String message) {
-        getServer().getConsoleSender().sendMessage(message);
+    public static JavaPlugin getPlugin() {
+        return JavaPlugin.getProvidingPlugin(AquaPlugin.class);
     }
 }

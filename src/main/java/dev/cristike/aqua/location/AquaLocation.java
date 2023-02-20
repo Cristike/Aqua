@@ -22,7 +22,7 @@
 
 package dev.cristike.aqua.location;
 
-import dev.cristike.aqua.server.AquaServer;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 
 public class AquaLocation {
+
     /**
      * Gets the world with the given name.
      *
@@ -37,7 +38,7 @@ public class AquaLocation {
      * @return an optional that may contain the world
      * */
     public static Optional<World> getWorld(@NotNull String name) {
-        return Optional.ofNullable(AquaServer.getServer().getWorld(name));
+        return Optional.ofNullable(Bukkit.getWorld(name));
     }
 
     /**
