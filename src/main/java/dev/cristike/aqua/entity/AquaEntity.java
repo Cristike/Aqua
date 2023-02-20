@@ -41,7 +41,10 @@ public class AquaEntity {
      * */
     @NotNull
     public static List<Entity> getNearbyEntities(@NotNull Entity entity, double radius) {
-        return entity.getNearbyEntities(radius, radius, radius);
+        List<Entity> entities = entity.getNearbyEntities(radius, radius, radius);
+        entities.add(entity);
+
+        return entities;
     }
 
     /**
@@ -56,8 +59,10 @@ public class AquaEntity {
         List<Entity> entities = getNearbyEntities(entity, radius);
         List<Player> players = new ArrayList<>();
 
-        entities.removeIf(target -> !(target instanceof Player));
-        entities.forEach(target -> players.add((Player) target));
+        entities.forEach(target -> {
+            if (!(target instanceof Player player)) return;
+            players.add(player);
+        });
 
         return players;
     }
