@@ -22,6 +22,7 @@
 
 package dev.cristike.aqua.location;
 
+import dev.cristike.aqua.number.AquaMath;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -69,5 +70,25 @@ public class AquaLocation {
      * */
     public static Optional<Location> getLocation(@NotNull String world, double x, double y, double z, float yaw, float pitch) {
         return getWorld(world).map(value -> new Location(value, x, y, z, yaw, pitch));
+    }
+
+    /**
+     * Gets the location from the given string coordinates.
+     *
+     * @param world the location's world name
+     * @param x the location's x coordinate
+     * @param y the location's y coordinate
+     * @param z the location's z coordinate
+     *
+     * @return an optional that may contain the location
+     * */
+    public static Optional<Location> getLocation(@NotNull String world, @NotNull String x, @NotNull String y, @NotNull String z) {
+        Optional<Double> oX = AquaMath.parseDouble(x);
+        Optional<Double> oY = AquaMath.parseDouble(y);
+        Optional<Double> oZ = AquaMath.parseDouble(z);
+
+        if (oX.isEmpty() || oY.isEmpty() || oZ.isEmpty()) return Optional.empty();
+
+        return getWorld(world).map(value -> new Location(value, oX.get(), oY.get(), oZ.get()));
     }
 }
