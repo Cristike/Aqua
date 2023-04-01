@@ -1,6 +1,5 @@
 # Aqua
 
----
 Aqua is a lightweight tool meant to help in the process of developing
 Spigot plugins by providing abstractions for boilerplate code.  
 I use Aqua in most of my projects as it is a great helper when it comes to the
