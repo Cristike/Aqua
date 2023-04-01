@@ -28,10 +28,14 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.Consumer;
+
 public class AquaScheduler {
 
     /**
      * Gets the server scheduler.
+     *
+     * @return the instance of the BukkitScheduler
      * */
     @NotNull
     public static BukkitScheduler getScheduler() { return Bukkit.getScheduler(); }
@@ -84,10 +88,23 @@ public class AquaScheduler {
      *
      * @param runnable the action
      * @param period the period
+     *
+     * @return the BukkitTask created for the timer
      * */
     @NotNull
     public static BukkitTask runTaskTimer(@NotNull Runnable runnable, long period) {
-         return getScheduler().runTaskTimer(AquaPlugin.getPlugin(), runnable, period, period);
+         return getScheduler().runTaskTimer(AquaPlugin.getPlugin(), runnable, 0, period);
+    }
+
+    /**
+     * Executes repeatedly the given action
+     * with gaps of a given period.
+     *
+     * @param consumer the action
+     * @param period the period
+     * */
+    public static void runTaskTimer(@NotNull Consumer<BukkitTask> consumer, long period) {
+        getScheduler().runTaskTimer(AquaPlugin.getPlugin(), consumer, 0, period);
     }
 
     /**
@@ -97,10 +114,24 @@ public class AquaScheduler {
      * @param runnable the action
      * @param delay the delay
      * @param period the period
+     *
+     * @return the BukkitTask created for the timer
      * */
     @NotNull
     public static BukkitTask runTaskTimer(@NotNull Runnable runnable, long delay, long period) {
         return getScheduler().runTaskTimer(AquaPlugin.getPlugin(), runnable, delay, period);
+    }
+
+    /**
+     * Executes repeatedly the given action
+     * with gaps of a given period after a given delay.
+     *
+     * @param consumer the action
+     * @param delay the delay
+     * @param period the period
+     * */
+    public static void runTaskTimer(@NotNull Consumer<BukkitTask> consumer, long delay, long period) {
+        getScheduler().runTaskTimer(AquaPlugin.getPlugin(), consumer, delay, period);
     }
 
     /**
@@ -109,10 +140,23 @@ public class AquaScheduler {
      *
      * @param runnable the action
      * @param period the period
+     *
+     * @return the BukkitTask created for the timer
      * */
     @NotNull
     public static BukkitTask runTaskTimerAsync(@NotNull Runnable runnable, long period) {
-        return getScheduler().runTaskTimerAsynchronously(AquaPlugin.getPlugin(), runnable, period, period);
+        return getScheduler().runTaskTimerAsynchronously(AquaPlugin.getPlugin(), runnable, 0, period);
+    }
+
+    /**
+     * Executes repeatedly the given action asynchronously
+     * with gaps of a given period,
+     *
+     * @param consumer the action
+     * @param period the period
+     * */
+    public static void runTaskTimerAsync(@NotNull Consumer<BukkitTask> consumer, long period) {
+        getScheduler().runTaskTimerAsynchronously(AquaPlugin.getPlugin(), consumer, 0, period);
     }
 
     /**
@@ -122,9 +166,23 @@ public class AquaScheduler {
      * @param runnable the action
      * @param delay the delay
      * @param period the period
+     *
+     * @return the BukkitTask created for the timer
      * */
     @NotNull
     public static BukkitTask runTaskTimerAsync(@NotNull Runnable runnable, long delay, long period) {
         return getScheduler().runTaskTimerAsynchronously(AquaPlugin.getPlugin(), runnable, delay, period);
+    }
+
+    /**
+     * Executes repeatedly the given action asynchronously
+     * with gaps of a given period after a given delay.
+     *
+     * @param consumer the action
+     * @param delay the delay
+     * @param period the period
+     * */
+    public static void runTaskTimerAsync(@NotNull Consumer<BukkitTask> consumer, long delay, long period) {
+        getScheduler().runTaskTimerAsynchronously(AquaPlugin.getPlugin(), consumer, delay, period);
     }
 }

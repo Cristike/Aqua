@@ -22,6 +22,7 @@
 
 package dev.cristike.aqua.player;
 
+import dev.cristike.aqua.scheduler.AquaScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -96,8 +97,17 @@ public class AquaPlayer {
      *
      * @param message the message
      * */
-    public static void sendMessage(@NotNull String message) {
+    public static void broadcastMessage(@NotNull String message) {
         Bukkit.getOnlinePlayers().forEach(target -> target.sendMessage(message));
+    }
+
+    /**
+     * Sends the messages to all online players.
+     *
+     * @param messages the list of messages
+     * */
+    public static void broadcastMessages(@NotNull List<String> messages) {
+        messages.forEach(AquaPlayer::broadcastMessage);
     }
 
     /**
@@ -106,21 +116,12 @@ public class AquaPlayer {
      * @param player the target player
      * @param messages the list of messages
      * */
-    public static void sendMessage(@NotNull Player player, @NotNull List<String> messages) {
+    public static void sendMessages(@NotNull Player player, @NotNull List<String> messages) {
         messages.forEach(player::sendMessage);
     }
 
     /**
-     * Sends the messages to all online players.
-     *
-     * @param messages the list of messages
-     * */
-    public static void sendMessage(@NotNull List<String> messages) {
-        messages.forEach(AquaPlayer::sendMessage);
-    }
-
-    /**
-     * Teleports all the players in the given list to the given location.
+     * Teleports all the players in the given list to the target location.
      *
      * @param players the player list
      * @param location the location

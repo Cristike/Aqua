@@ -22,6 +22,7 @@
 
 package dev.cristike.aqua.entity;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -33,11 +34,13 @@ import java.util.function.Consumer;
 public class AquaEntity {
 
     /**
-     * Gets the entities that are around the given entity
+     * Gets the entities that are around the target entity
      * in the given radius.
      *
      * @param entity the entity
      * @param radius the radius
+     *
+     * @return a list of entities that may be empty
      * */
     @NotNull
     public static List<Entity> getNearbyEntities(@NotNull Entity entity, double radius) {
@@ -48,11 +51,32 @@ public class AquaEntity {
     }
 
     /**
-     * Gets the players that are around the given entity
+     * Gets the entities that are around the target location
+     * in the given radius.
+     *
+     * @param location the location
+     * @param radius the radius
+     *
+     * @return a list of entities that may be empty
+     * */
+    @NotNull
+    public static List<Entity> getNearbyEntities(@NotNull Location location, double radius) {
+        List<Entity> entities = new ArrayList<>();
+
+        if (location.getWorld() != null)
+            entities.addAll(location.getWorld().getNearbyEntities(location, radius, radius, radius));
+
+        return entities;
+    }
+
+    /**
+     * Gets the players that are around the target entity
      * in the given radius.
      *
      * @param entity the entity
      * @param radius the radius
+     *
+     * @return a list of players that may be empty
      * */
     @NotNull
     public static List<Player> getNearbyPlayers(@NotNull Entity entity, double radius) {
@@ -68,26 +92,51 @@ public class AquaEntity {
     }
 
     /**
+     * Gets the players that are around the target location
+     * in the given radius.
+     *
+     * @param location the location
+     * @param radius the radius
+     *
+     * @return a list of players that may be empty
+     * */
+    public static List<Player> getNearbyPlayers(@NotNull Location location, double radius) {
+        List<Entity> entities = getNearbyEntities(location, radius);
+        List<Player> players = new ArrayList<>();
+
+        entities.forEach(target -> {
+            if (!(target instanceof Player player)) return;
+            players.add(player);
+        });
+
+        return players;
+    }
+
+    /**
      * Executes the given action for all the entities
-     * that are around the given entity in the given radius.
+     * that are around the target entity in the given radius.
      *
      * @param entity the entity
      * @param radius the radius
      * @param consumer the action
      * */
-    public static void forEachNearbyEntity(@NotNull Entity entity, double radius, @NotNull Consumer<Entity> consumer) {
+    public static void forEachNearbyEntity(@NotNull Entity entity,
+                                           double radius,
+                                           @NotNull Consumer<Entity> consumer) {
         getNearbyEntities(entity, radius).forEach(consumer);
     }
 
     /**
      * Executes the given action for all the players
-     * that are around the given entity in the given radius.
+     * that are around the target entity in the given radius.
      *
      * @param entity the entity
      * @param radius the radius
      * @param consumer the action
      * */
-    public static void forEachNearbyPlayer(@NotNull Entity entity, double radius, @NotNull Consumer<Player> consumer) {
+    public static void forEachNearbyPlayer(@NotNull Entity entity,
+                                           double radius,
+                                           @NotNull Consumer<Player> consumer) {
         getNearbyPlayers(entity, radius).forEach(consumer);
     }
 }
