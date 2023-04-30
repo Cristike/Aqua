@@ -91,4 +91,35 @@ public class AquaLocation {
 
         return getWorld(world).map(value -> new Location(value, oX.get(), oY.get(), oZ.get()));
     }
+
+    /**
+     * Gets the location from the given string coordinates.
+     *
+     * @param world the location's world name
+     * @param x the location's x coordinate
+     * @param y the location's y coordinate
+     * @param z the location's z coordinate
+     * @param yaw the location's yaw
+     * @param pitch the location's pitch
+     *
+     * @return an optional that may contain the location
+     * */
+    public static Optional<Location> getLocation(@NotNull String world,
+                                                 @NotNull String x,
+                                                 @NotNull String y,
+                                                 @NotNull String z,
+                                                 @NotNull String yaw,
+                                                 @NotNull String pitch) {
+        Optional<Double> oX = AquaMath.parseDouble(x);
+        Optional<Double> oY = AquaMath.parseDouble(y);
+        Optional<Double> oZ = AquaMath.parseDouble(z);
+        Optional<Float> oYaw = AquaMath.parseFloat(yaw);
+        Optional<Float> oPitch = AquaMath.parseFloat(pitch);
+
+        if (oX.isEmpty() || oY.isEmpty() || oZ.isEmpty() || oYaw.isEmpty() || oPitch.isEmpty())
+            return Optional.empty();
+
+        return getWorld(world).map(value -> new Location(value, oX.get(), oY.get(), oZ.get(),
+                oYaw.get(), oPitch.get()));
+    }
 }
