@@ -5,7 +5,7 @@ Spigot plugins by providing abstractions for boilerplate code.
 I use Aqua in most of my projects as it is a great helper when it comes to the
 repetitive, boring tasks that come with plugin development.
 
-### How to use
+# How to use
 In order to use Aqua in your projects, you'll need to install the
 maven repository locally on your machine.
 
@@ -27,7 +27,10 @@ maven repository locally on your machine.
 Keep in mind that you'll need to reinstall the repository when a
 new version of Aqua is released.
 
-### Examples
+# Documentation
+In order to understand the tool better, you can check out the [docs](https://cristike.github.io/Aqua/).
+
+# Examples
 
 A first good example is a problem that I always encounter when
 parsing locations from command arguments. You need to check that the
@@ -87,6 +90,6 @@ public class Example {
 }
 ```
 
-### Contact
+# Contact
 If you have any questions regarding Aqua, feel free to contact me on discord:
 ```Cristike#2808```.
