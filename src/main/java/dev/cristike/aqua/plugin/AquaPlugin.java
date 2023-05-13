@@ -25,6 +25,9 @@ package dev.cristike.aqua.plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * A class that contains an abstraction of getting the hosting plugin.
+ * */
 public class AquaPlugin {
 
     /**

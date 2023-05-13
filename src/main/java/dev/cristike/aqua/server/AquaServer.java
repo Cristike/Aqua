@@ -26,6 +26,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * A class that contains abstractions for various tasks targeting the server.
+ * */
 public class AquaServer {
 
     /**

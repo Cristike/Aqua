@@ -30,6 +30,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
+/**
+ * A class that contains abstractions for various tasks targeting locations.
+ * */
 public class AquaLocation {
 
     /**

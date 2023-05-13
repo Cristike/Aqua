@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * A class that contains abstractions for various tasks targeting entities.
+ * */
 public class AquaEntity {
 
     /**
@@ -100,6 +103,7 @@ public class AquaEntity {
      *
      * @return a list of players that may be empty
      * */
+    @NotNull
     public static List<Player> getNearbyPlayers(@NotNull Location location, double radius) {
         List<Entity> entities = getNearbyEntities(location, radius);
         List<Player> players = new ArrayList<>();

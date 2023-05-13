@@ -34,6 +34,9 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * A class that contains abstractions for various tasks targeting players.
+ * */
 public class AquaPlayer {
 
     /**

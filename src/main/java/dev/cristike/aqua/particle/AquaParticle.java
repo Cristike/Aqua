@@ -27,6 +27,9 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * A class that contains abstractions for various tasks targeting particles.
+ * */
 public class AquaParticle {
 
     /**

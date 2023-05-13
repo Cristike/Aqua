@@ -30,6 +30,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
+/**
+ * A class that contains abstractions for various tasks targeting
+ * the server scheduler.
+ * */
 public class AquaScheduler {
 
     /**
