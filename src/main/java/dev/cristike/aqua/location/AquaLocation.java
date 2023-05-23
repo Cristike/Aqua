@@ -22,7 +22,7 @@
 
 package dev.cristike.aqua.location;
 
-import dev.cristike.aqua.number.AquaMath;
+import dev.cristike.aqua.math.AquaNumber;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -86,9 +86,9 @@ public class AquaLocation {
      * @return an optional that may contain the location
      * */
     public static Optional<Location> getLocation(@NotNull String world, @NotNull String x, @NotNull String y, @NotNull String z) {
-        Optional<Double> oX = AquaMath.parseDouble(x);
-        Optional<Double> oY = AquaMath.parseDouble(y);
-        Optional<Double> oZ = AquaMath.parseDouble(z);
+        Optional<Double> oX = AquaNumber.parseDouble(x);
+        Optional<Double> oY = AquaNumber.parseDouble(y);
+        Optional<Double> oZ = AquaNumber.parseDouble(z);
 
         if (oX.isEmpty() || oY.isEmpty() || oZ.isEmpty()) return Optional.empty();
 
@@ -113,11 +113,11 @@ public class AquaLocation {
                                                  @NotNull String z,
                                                  @NotNull String yaw,
                                                  @NotNull String pitch) {
-        Optional<Double> oX = AquaMath.parseDouble(x);
-        Optional<Double> oY = AquaMath.parseDouble(y);
-        Optional<Double> oZ = AquaMath.parseDouble(z);
-        Optional<Float> oYaw = AquaMath.parseFloat(yaw);
-        Optional<Float> oPitch = AquaMath.parseFloat(pitch);
+        Optional<Double> oX = AquaNumber.parseDouble(x);
+        Optional<Double> oY = AquaNumber.parseDouble(y);
+        Optional<Double> oZ = AquaNumber.parseDouble(z);
+        Optional<Float> oYaw = AquaNumber.parseFloat(yaw);
+        Optional<Float> oPitch = AquaNumber.parseFloat(pitch);
 
         if (oX.isEmpty() || oY.isEmpty() || oZ.isEmpty() || oYaw.isEmpty() || oPitch.isEmpty())
             return Optional.empty();

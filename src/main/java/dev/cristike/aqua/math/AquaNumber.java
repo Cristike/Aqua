@@ -20,17 +20,16 @@
  *   SOFTWARE.
  */
 
-package dev.cristike.aqua.number;
+package dev.cristike.aqua.math;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
 /**
- * A class that contains abstractions for various tasks targeting maths and
- * numbers.
+ * A class that contains abstractions for various tasks targeting numbers.
  * */
-public class AquaMath {
+public class AquaNumber {
 
     /**
      * Transforms the given input into an integer.
