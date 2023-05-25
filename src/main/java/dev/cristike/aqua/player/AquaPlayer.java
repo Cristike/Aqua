@@ -22,7 +22,6 @@
 
 package dev.cristike.aqua.player;
 
-import dev.cristike.aqua.scheduler.AquaScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -93,6 +92,16 @@ public class AquaPlayer {
      * */
     public static List<Player> getPlayers(@NotNull Predicate<Player> predicate) {
         return Bukkit.getOnlinePlayers().stream().filter(predicate).collect(Collectors.toList());
+    }
+
+    /**
+     * Checks if the player with the given unique id is online.
+     *
+     * @param uuid the unique id
+     * @return whether the player is online or not.
+     * */
+    public static boolean isOnline(@NotNull UUID uuid) {
+        return Bukkit.getServer().getOnlinePlayers().stream().anyMatch(target -> target.getUniqueId().equals(uuid));
     }
 
     /**
