@@ -22,7 +22,7 @@ maven repository locally on your machine.
     <scope>compile</scope>
 </dependency>
 
-<!-- The latest version is 1.6.0 -->
+<!-- The latest version is 1.7.0 -->
 ```
 
 Keep in mind that you'll need to reinstall the repository when a

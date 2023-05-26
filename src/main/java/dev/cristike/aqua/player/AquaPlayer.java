@@ -95,6 +95,21 @@ public class AquaPlayer {
     }
 
     /**
+     * Gets the unique id of the player with the given name.
+     *
+     * @param name the player name
+     * @return an optional that may contain the unique id
+     * */
+    public static Optional<UUID> getPlayerUUID(@NotNull String name) {
+        if (isOnline(name))
+            return Optional.of(getPlayer(name).get().getUniqueId());
+        else if (getOfflinePlayer(name).isPresent())
+            return Optional.of(getOfflinePlayer(name).get().getUniqueId());
+        else
+            return Optional.empty();
+    }
+
+    /**
      * Checks if the player with the given unique id is online.
      *
      * @param uuid the unique id
@@ -102,6 +117,16 @@ public class AquaPlayer {
      * */
     public static boolean isOnline(@NotNull UUID uuid) {
         return Bukkit.getServer().getOnlinePlayers().stream().anyMatch(target -> target.getUniqueId().equals(uuid));
+    }
+
+    /**
+     * Checks if the player with the given name is online.
+     *
+     * @param name the player name
+     * @return whether the player is online or not.
+     * */
+    public static boolean isOnline(@NotNull String name) {
+        return Bukkit.getServer().getOnlinePlayers().stream().anyMatch(target -> target.getName().equals(name));
     }
 
     /**
